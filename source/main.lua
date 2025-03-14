@@ -593,10 +593,29 @@ function addBooksFromFolder(folderPath)
 			insert(books, book)
 		end
 	end
-	-- Sort alphabetically to ensure deterministic order
-	table.sort(books, function (a, b)
-		return a.name > b.name
-	end)
+	
+	-- New sorting script to fix seperate Chapters 
+	-- Sourced from here https://stackoverflow.com/questions/27909784/lua-sort-table-alphabetically-except-numbers#comment44222843_27910240
+	
+	 local function split(a) 
+		if string.match(a.name, '%d+') then 
+			local x,y=a.name:match("(%D+)(%d+)") 
+			return x,tonumber(y) 
+		else 
+			local x,y = a.name,0
+			return x,y 
+		end 
+	end 
+	
+	table.sort(books, function (a,b)
+			local a1,a2=split(a)
+			local b1,b2=split(b)
+			-- reverse alphabetical order for easier search
+			return a1<b1 or (a1==b1 and a2<b2)
+		end
+	)
+	
+	-- end new sorting script
 	return books
 end
 
