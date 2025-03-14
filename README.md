@@ -1,3 +1,7 @@
+Changes:
+- Changed the sorting algorithm to support separate chapters in folders as well as single books. (Chapter 1, Chapter 2, etc)
+- Sorts books from Z-A, bottom to top, as the menu always starts from the bottom
+
 # PlayBook
 ## A powerful and flexible ebook reader for the Playdate console
 
